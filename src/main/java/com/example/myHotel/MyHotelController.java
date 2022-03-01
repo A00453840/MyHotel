@@ -14,23 +14,19 @@ public class MyHotelController {
         return "It's working!";
     }
 
-    @PostMapping(path="/add") // Map ONLY POST Requests
+    @PostMapping(path="/add")
     public @ResponseBody
-    String addNewHotel (@RequestParam String name
-            , @RequestParam String address) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
+    String addNewHotel (@RequestParam String name, @RequestParam String address) {
 
         Hotel h = new Hotel();
         h.setHotelName(name);
         h.setHotelAddress(address);
         hotelRepository.save(h);
-        return "Saved";
+        return "New Hotel added!";
     }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Hotel> getAllHotels() {
-        // This returns a JSON or XML with the users
         return hotelRepository.findAll();
     }
 }
